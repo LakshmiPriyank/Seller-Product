@@ -1,0 +1,16 @@
+.<!DOCTYPE html>
+<input type="file" id="productImages" name="productImages[]" multiple>
+<div id="imagePreview"></div>
+
+<script>
+  document.getElementById('productImages').addEventListener('change', function(event) {
+    const preview = document.getElementById('imagePreview');
+    preview.innerHTML = ''; // Clear previous previews
+    Array.from(event.target.files).forEach(file => {
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.width = 100;
+      preview.appendChild(img);
+    });
+  });
+</script>

@@ -1,0 +1,32 @@
+const multer = require('multer');
+
+// Storage engine configuration for Multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+// API to upload product images
+app.post('/upload-images', upload.array('productImages', 5), (req, res) => {
+  const imageUrls = req.files.map(file => file.path);
+  // Store the image URLs in the database for the specific product
+  res.json({ success: true, imageUrls });
+});
+const isAdmin = (req, res, next) => {
+  if (req.user.role !== 'admin') {
+    return res.status(403).json({ message: 'Access denied' });
+  }
+  next();
+};
+
+// Admin route to manage seller dashboard
+app.get('/admin/sellers', isAdmin, (req, res) => {
+  // Fetch and manage seller data
+  res.json({ sellers: sellerData });
+});

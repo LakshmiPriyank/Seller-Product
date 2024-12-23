@@ -1,0 +1,12 @@
+// Add product API
+app.post('/add-product', (req, res) => {
+  const { name, price, description, images } = req.body;
+  const newProduct = new Product({ name, price, description, images });
+  newProduct.save().then(() => res.json({ success: true }));
+});
+
+// Delete product API
+app.delete('/delete-product/:id', (req, res) => {
+  const { id } = req.params;
+  Product.findByIdAndDelete(id).then(() => res.json({ success: true }));
+});

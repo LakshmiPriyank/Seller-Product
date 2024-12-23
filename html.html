@@ -1,0 +1,15 @@
+.<!DOCTYPE html>
+<form id="addProductForm">
+  <input type="text" id="productName" placeholder="Product Name">
+  <input type="number" id="productPrice" placeholder="Price">
+  <textarea id="productDescription" placeholder="Description"></textarea>
+  <button type="submit">Add Product</button>
+</form>
+
+<div id="productList">
+  <!-- Loop through products and display each with a delete button -->
+  <div>
+    <span>Product 1</span>
+    <button onclick="deleteProduct(1)">Delete</button>
+  </div>
+</div>
